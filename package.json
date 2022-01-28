@@ -1,6 +1,6 @@
 {
   "name": "growthboot-password-strength-score",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Check a password for how brute-force-able it is, instead of just checking it for arbitrary rules",
   "main": "lib/index.js",
   "scripts": {
