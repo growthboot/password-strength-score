@@ -33,7 +33,6 @@
 const PasswordStrengthScore = require('growthboot-password-strength-score');
 const strength = PasswordStrengthScore.test("testpassword123");
 console.log(`
-	Password: ${input}
 	Score: ${strength.score}
 	Quality: ${strength.quality}
 `);
