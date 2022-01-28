@@ -30,7 +30,7 @@
 
 ## Usage
 ```js
-var PasswordStrengthScore = require('../lib/index');
+var PasswordStrengthScore = require('growthboot-password-strength-score');
 const strength = PasswordStrengthScore.test(input);
 console.log(`
 	Password: ${input}
