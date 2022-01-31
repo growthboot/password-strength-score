@@ -1,6 +1,8 @@
 import { wordsIndex, WordHash } from './words';
 import { commonSequences, SequenceHash } from './sequences';
 
+const symbolsRegex: RegExp = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
 // customizable settings
 export let minLength: number = 8;
 
@@ -10,8 +12,8 @@ export function setMinLength(value: number): void {
 
 export function PasswordStrengthScore(characters: string) {
 	let intTestScore: number = 0;
-	//intTestScore+=
-	intTestScore+=sequenceVarient(characters);
+	intTestScore+=typeVarient(characters);
+	//intTestScore+=sequenceVarient(characters);
 	//intTestScore+=wordVarient(characters);
 	//intTestScore+=caseVarient(characters);
 	//intTestScore+=characterVarient(characters);
@@ -172,7 +174,29 @@ function sequenceVarient(characters: string): number {
 
 // find the variation of different types of characters
 function typeVarient(characters: string): number {
-	return -1;
+	const arrCharacters: string[] = characters.split("");
+	const intCharacters: number = arrCharacters.length;
+	let intSymbols: number = 0; // symbols including spaces because spaces are rarely used in passwords much like symbols
+	let intNumbers: number = 0;
+	let intLetters: number = 0;
+	arrCharacters.forEach((strCharacter: string) => {
+		if (/[0-9]/.test(strCharacter)) {
+			intNumbers++;
+		} else if (symbolsRegex.test(strCharacter) || strCharacter == ' ') {
+			intSymbols++;
+		} else {
+			intLetters++;
+		}
+	});
+	// best score is types are even dispersed causing the most variation
+	const intExpectedAverage = Math.round(intCharacters / 3); // 3 types
+	let intScore: number = 0;
+	intScore += Math.abs(intExpectedAverage-intNumbers);
+	intScore += Math.abs(intExpectedAverage-intSymbols);
+	intScore += Math.abs(intExpectedAverage-intLetters);
+	console.log({score: (intScore)});
+	return intScore;
+
 }
 
 // detect how much veriation there is in the capitlaization of characters
@@ -182,7 +206,7 @@ function caseVarient(characters: string): number {
 	let intCaseVarient: number = 0;
 	for (let intLetter: number = 0; intLetter!=intCharacters; intLetter++) {
 		const strChar: string = characters[intLetter];
-		if (strChar.match(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~ 0-9]/)) // skip characters that cant be capitalized
+		if (symbolsRegex.test(strChar) || /[0-9 ]/.test(strChar)) // skip characters that cant be capitalized
 			continue;
 		const isUpper: boolean = strChar === strChar.toUpperCase(); // this method of case detection should also work on none english language
 		if (isUpper)
