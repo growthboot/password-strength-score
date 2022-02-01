@@ -1,4 +1,4 @@
-import { PasswordStrengthScore } from '../lib/index';
+import { PasswordStrengthScore } from '../index';
 
 export function showScore(input: string): void {
 	const strength = PasswordStrengthScore(input);

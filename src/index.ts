@@ -1,13 +1,15 @@
-import { CharacterVarient } from './modules/varients/CharacterVarient';
-import { SequenceVarient } from './modules/varients/SequenceVarient';
-import { TypeVarient } from './modules/varients/TypeVarient';
-import { CaseVarient } from './modules/varients/CaseVarient';
-import { WordVarient } from './modules/varients/WordVarient';
-
-type VarientType = 'character' | 'sequence' | 'type' | 'case' | 'word';
+import { CharacterVarient } from './lib/modules/varients/CharacterVarient';
+import { SequenceVarient } from './lib/modules/varients/SequenceVarient';
+import { TypeVarient } from './lib/modules/varients/TypeVarient';
+import { CaseVarient } from './lib/modules/varients/CaseVarient';
+import { WordVarient } from './lib/modules/varients/WordVarient';
 
 interface VarientScoresGroup {
-	[key: string]: number;
+	character: number;
+	sequence: number;
+	type: number;
+	case: number;
+	word: number;
 }
 
 // customizable settings
