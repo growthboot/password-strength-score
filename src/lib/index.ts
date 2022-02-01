@@ -17,6 +17,7 @@ export function PasswordStrengthScore(characters: string) {
 	//intTestScore+=wordVarient(characters);
 	//intTestScore+=caseVarient(characters);
 	//intTestScore+=characterVarient(characters);
+
 	//if (hasSpecialCharacter(characters))
 	//	intTestScore++;
 	//if (/[0-9]/.test(characters))
@@ -194,9 +195,10 @@ function typeVarient(characters: string): number {
 	intScore += Math.abs(intExpectedAverage-intNumbers);
 	intScore += Math.abs(intExpectedAverage-intSymbols);
 	intScore += Math.abs(intExpectedAverage-intLetters);
-	console.log({score: (intScore)});
+	intScore = intScore / intCharacters;
+	intScore = Math.min(1, intScore);
+	intScore = 1-intScore;
 	return intScore;
-
 }
 
 // detect how much veriation there is in the capitlaization of characters

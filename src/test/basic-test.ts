@@ -1,15 +1,17 @@
-const TestHelpers = require('./test-helpers.ts');
+import { showScore } from './test-helpers';
 
 console.log(`
 
 Tests:
 `);
 
-TestHelpers.showScore("test");
-TestHelpers.showScore("testtesttest");
-TestHelpers.showScore("testtesttest123asd");
-TestHelpers.showScore("test1234");
-TestHelpers.showScore("1234qwer");
+showScore("a!0");
+showScore("aa!!00");
+showScore("aaa!!0");
+showScore("aaaaaaa!0");
+showScore("aaaaa!!!!!0");
+showScore("aaaaaaaa!0");
+showScore("TXiLTD5ZJqhWdgM")
 
 console.log(`
 
