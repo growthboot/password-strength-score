@@ -4,7 +4,7 @@
 	"description": "Check a password for how brute-force-able it is, instead of just checking it for arbitrary rules",
 	"main": "src/index.ts",
 	"scripts": {
-		"tests": "npx nodemon src/test/basic-test.ts",
+		"dev": "npx nodemon src/test/basic-test.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {

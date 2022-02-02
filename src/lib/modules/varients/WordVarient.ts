@@ -13,6 +13,7 @@ interface WordVarientType {
 export type EmptyableString = string | undefined;
 
 export function WordVarient(characters: string): number {
+	characters = characters.toLowerCase();
 	// find the common words
 	const arrWords: WordVarientType[] = [];
 	for (var intStart: number = 0; intStart<characters.length-1; intStart++) {

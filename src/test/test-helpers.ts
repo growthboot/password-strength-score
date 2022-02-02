@@ -6,5 +6,6 @@ export function showScore(input: string): void {
 		Password: ${input}
 		Score: ${strength.score}
 		Quality: ${strength.quality}
+		Scores: ${JSON.stringify(strength.scores)}
 	`);	
 }

@@ -10,6 +10,7 @@ interface VarientScoresGroup {
 	type: number;
 	case: number;
 	word: number;
+	length: number;
 }
 
 // customizable settings
@@ -20,48 +21,46 @@ export function setMinLength(value: number): void {
 }
 
 export function PasswordStrengthScore(characters: string) {
-	let intTestScore: number = 0;
-	//intTestScore+=typeVarient(characters);
-	//intTestScore+=sequenceVarient(characters);
-	//intTestScore+=wordVarient(characters);
-	//intTestScore+=caseVarient(characters);
-	//intTestScore+=characterVarient(characters);
-
-	//if (hasSpecialCharacter(characters))
-	//	intTestScore++;
-	//if (/[0-9]/.test(characters))
-	//	intTestScore++;
-	//const intRepeatPenelty = Math.ceil(findRepeatedWords(characters).length / 2);
-	//console.log('intRepeatPenelty', intRepeatPenelty);
-	//intTestScore -= intRepeatPenelty;
-	//const score = characters.length + Math.max(0, intTestScore);
-	const score: number = intTestScore;
+	const scores: VarientScoresGroup = varientScores(characters);
+	const score: number = defaultScoreCalculation(scores);
 	return {
 		score,
+		scores,
 		quality: qualify_score(score, characters)
 	};
 }
 
-export function varientScores(characters: string): VarientScoresGroup {
+function defaultScoreCalculation(scores: VarientScoresGroup): number {
+	return scores.length 
+		* 1 // scales the score so the best password roughly hits a 10
+		* scores.word 
+		* scores.sequence 
+		* scores.character
+		* Math.max(0.4, scores.type)
+		* Math.max(0.4, scores.case);
+}
+
+function varientScores(characters: string): VarientScoresGroup {
 	return {
 		character: CharacterVarient(characters),
 		sequence: SequenceVarient(characters),
 		type: TypeVarient(characters),
 		case: CaseVarient(characters),
-		word: WordVarient(characters)
+		word: WordVarient(characters),
+		length: characters.length
 	}
 }
 
 function qualify_score(intScore: number, strCharacters: string): string {
-	if (strCharacters.length < minLength) {
-		return 'too-short';
-	} else if (intScore < 14) {
-		return 'almost';
-	} else if (intScore > 18) {
+	if (intScore > 9) {
 		return 'very-strong';
-	} else if (intScore > 15) {
+	} else if (intScore > 6) {
 		return 'strong';
-	} else {
+	} else if (intScore > 5) {
 		return 'okay';
+	} else if (intScore > 4) {
+		return 'almost';
+	} else {
+		return 'weak';
 	}
 }
