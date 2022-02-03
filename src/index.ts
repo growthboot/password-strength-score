@@ -31,16 +31,19 @@ export function PasswordStrengthScore(characters: string) {
 }
 
 function defaultScoreCalculation(scores: VarientScoresGroup): number {
-	const scaler = 1;
-	const word = scores.word;
-	const sequence = scores.sequence;
+	const scalerVal = 1.5;
+	const wordVal = scores.word;
+	const sequenceVal = scores.sequence;
+	const characterVal = scores.character;
+	const typeVal = Math.min(1, (scores.type*2)+0.5);
+	const caseVal = Math.min(1, (scores.case*2)+0.5);
 	return scores.length 
-		* scaler // scales the score so the best password roughly hits a 10
-		* word 
-		* sequence 
-		* scores.character
-		* Math.min(1, (scores.type*2)+0.5)
-		* Math.min(1, (scores.case*2)+0.5);
+		* scalerVal // scales the score so the best password roughly hits a 10
+		* wordVal 
+		* sequenceVal 
+		* characterVal
+		* typeVal
+		* caseVal
 }
 
 function varientScores(characters: string): VarientScoresGroup {
