@@ -14,6 +14,15 @@ export type EmptyableString = string | undefined;
 
 export function WordVarient(characters: string): number {
 	characters = characters.toLowerCase();
+	// leet speak conversions
+	characters = characters.replace('@', 'a');
+	characters = characters.replace('$', 's');
+	characters = characters.replace('0', 'o');
+	characters = characters.replace('!', 'i');
+	characters = characters.replace('1', 'l');
+	characters = characters.replace('3', 'e');
+	characters = characters.replace('7', 't');
+	characters = characters.replace('5', 's');
 	// find the common words
 	const arrWords: WordVarientType[] = [];
 	for (var intStart: number = 0; intStart<characters.length-1; intStart++) {

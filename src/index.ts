@@ -31,12 +31,19 @@ export function PasswordStrengthScore(characters: string) {
 }
 
 function defaultScoreCalculation(scores: VarientScoresGroup): number {
-	const scalerVal = 1.5;
-	const wordVal = scores.word;
+	const scalerVal = 0.4;
+	const wordVal = scores.word*2;
 	const sequenceVal = scores.sequence;
 	const characterVal = scores.character;
-	const typeVal = Math.min(1, (scores.type*2)+0.5);
-	const caseVal = Math.min(1, (scores.case*2)+0.5);
+	const typeVal = Math.min(1.5, (scores.type+0.5)*2);
+	const caseVal = Math.min(1.5, (scores.case+0.5)*2);
+	console.log('adjusted', {
+		wordVal,
+		sequenceVal,
+		characterVal,
+		typeVal,
+		caseVal
+	});
 	return scores.length 
 		* scalerVal // scales the score so the best password roughly hits a 10
 		* wordVal 
@@ -67,6 +74,6 @@ function qualify_score(intScore: number, strCharacters: string): string {
 	} else if (intScore > 4) {
 		return 'almost';
 	} else {
-		return 'weak';
+		return 'too-weak';
 	}
 }
