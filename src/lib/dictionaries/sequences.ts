@@ -45,9 +45,14 @@ export interface SequenceHashType {
 	[key: string]: number;
 }
 
-export const CommonSequences: SequenceHashType[] = processSequences(defaultSequences);
+export let CommonSequences: SequenceHashType[] = processSequences(defaultSequences);
 
-function processSequences(sequences: string[]): SequenceHashType[] {
+export function ImportSequences(sequences: string[]): void {
+	const newSequences = processSequences(sequences);
+	newSequences.forEach((sequence: SequenceHashType) => CommonSequences.push(sequence));
+}
+
+export function processSequences(sequences: string[]): SequenceHashType[] {
 	// convert all the sequences values to arrays so that they can be looped and evaluated
 	let sequencesAsArrays:string[][] = stringsToArrays(sequences);
 	// create a duplicate of all values reversed so that the search can easily evaluate at combination backwords
@@ -57,7 +62,7 @@ function processSequences(sequences: string[]): SequenceHashType[] {
 	return sequencesHashed;
 }
 
-function stringsToArrays(sequences: string[]): string[][] {
+export function stringsToArrays(sequences: string[]): string[][] {
 	const result: string[][] = [];
 	sequences.forEach((sequence: string, index: number) => {
 		result[index] = sequence.split("");
@@ -73,7 +78,7 @@ function reverseArrayValues(sequences: string[][]):string[][] {
 	return result;
 }
 
-function sequencesAsHash(sequences: string[][]): SequenceHashType[] {
+export function sequencesAsHash(sequences: string[][]): SequenceHashType[] {
 	const result: SequenceHashType[] = [];
 	sequences.forEach((sequence: string[], index: number) => {
 		result[index] = arrayToHash(sequence);

@@ -1,7 +1,7 @@
-import { PasswordStrengthScore } from '../index';
+import Password1 from '../index';
 
 export function showScore(input: string): void {
-	const strength = PasswordStrengthScore(input);
+	const strength = Password1.test(input);
 	console.log(`
 		Password: ${input}
 		Score: ${strength.score}

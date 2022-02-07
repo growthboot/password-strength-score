@@ -68,21 +68,3 @@ export function WordVarient(characters: string): number {
 
 	return points/characters.length;
 }
-
-function findRepeatedWords(characters: string): string[] {
-	var arrWordsFound: string[] = [];
-	var objLetterHash: LetterHash = {};
-	for (var intStart: number = 0; intStart!=characters.length-1; intStart++) {
-		for (var intEnd: number = intStart+1; intEnd!=characters.length+1; intEnd++) {
-			if (intEnd-intStart < 2)
-				continue;
-			var strPart: string = characters.substring(intStart, intEnd);
-			if (objLetterHash[strPart]) {
-				arrWordsFound.push(strPart);
-			} else {
-				objLetterHash[strPart] = true;
-			}
-		}
-	}
-	return arrWordsFound;
-}

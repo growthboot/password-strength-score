@@ -2,17 +2,13 @@
 
 ## Check how brute-force-able a password is
 
-## Installation
-
-    npm install growthboot-password-strength-score
-
 ## How is this checker different
 
 Password validation has been added to software over the decades as a countermeasure to brute-force attacks on passwords. It can be used to block someone from entering a password that is too easy for brute-force attackers to guess.
 
 The most common brute-force countermeasure so far has been to simply set various character requirements for a password like minimum length, using uppercase and lowercase letters, using numbers, etc... So the question is, how well does this achieve our goal of making passwords hard to guess?
 
-Given that our goal is to outsmart brute-force attacks, one problem is that it reduces the total amount of variations a password can be, therefore reducing the number of guesses a brute-force attacker theoretically needs to make. 
+Given that our goal is to outsmart brute-force attacks, one problem with simple password validation is that it reduces the total amount of variations a password can be, therefore reducing the number of guesses a brute-force attacker theoretically needs to make. 
 
 Another problem is that people often do the same thing and simply enter the characters that the rules require at the end of the password, like "passw0rd!A". If people commonly do variations like this, it actually still makes passwords quite guessable. 
 
@@ -50,15 +46,50 @@ It's possible that over time, the scoring can change slightly due to improvement
 	9+: very-strong
 
 ## Installation
-
-npm install growthboot-password-strength-score
+```
+npm install password1
+```
 
 ## Usage
 ```js
-const PasswordStrengthScore = require('growthboot-password-strength-score');
-const strength = PasswordStrengthScore.test("testpassword123");
+const Password1 = require('password1');
+const strength = Password1.test("testpassword123");
 console.log(`
 	Score: ${strength.score}
 	Quality: ${strength.quality}
 `);
 ```
+
+```js
+const Password1 = require('password1');
+
+// custom dictionary
+Password1.dictionary(['bounjour','beaucoup','bonne']);
+
+const strength = Password1.test("ouibounjour23");
+console.log(strength);
+```
+
+```js
+const Password1 = require('password1');
+
+// custom sequences
+Password1.sequences(['pyfgcrl', 'aoeuidhns', 'qjkxbmwvz']); // the Dvorak keyboard layout
+
+const strength = Password1.test("pyfgaoeu123");
+console.log(strength);
+```
+
+```js
+const Password1 = require('password1');
+const usernameFromInput = "snoopdog";
+// custom sequences
+Password1.username(usernameFromInput);
+
+const strength = Password1.test("passforsnoopdog123");
+console.log(strength);
+```
+
+## Links
+	- [npm](https://google.com)
+	- [github](https://github.com/growthboot/password1)

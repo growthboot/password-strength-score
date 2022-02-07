@@ -1,3 +1,4 @@
+// accepts parameters in console for checking passwords
 import { showScore } from './test-helpers';
 
 const password = process.argv.slice(2).join(' ');

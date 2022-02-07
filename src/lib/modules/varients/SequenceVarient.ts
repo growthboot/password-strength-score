@@ -22,6 +22,7 @@ interface ActiveSequences {
 
 // detect the variation based on common character sequences
 export function SequenceVarient(characters: string): number {
+	characters = characters.toLowerCase();
 	const intCharacters: number = characters.length;
 	const objActiveSequences: ActiveSequences = {};
 	const arrSequencesFound: LoggedSequence[] = [];
@@ -95,7 +96,6 @@ export function SequenceVarient(characters: string): number {
 	if (!arrSequencesFound.length)
 		return 1;
 	const arrCharacters: EmptyableString[] = characters.split("");
-
 	let intWordsRemoved: number = 0;
 	arrSequencesFound.forEach(objSequence => {
 		let boolACharacterRemoved: boolean = false;
